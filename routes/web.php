@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GuideController;
+use App\Http\Controllers\FaultController;
+use App\Http\Controllers\SearchController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/specifications', [HomeController::class, 'specs'])->name('specs');
+Route::get('/safety', [HomeController::class, 'safety'])->name('safety');
+Route::get('/chapters', [HomeController::class, 'chapters'])->name('chapters');
+Route::get('/guide', [GuideController::class, 'index'])->name('guide');
+Route::get('/search', [SearchController::class, 'global'])->name('search.global');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('faults', FaultController::class);
