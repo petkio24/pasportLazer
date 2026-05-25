@@ -25,6 +25,8 @@
             <a class="nav-link" href="{{ route('chapters') }}">Все главы</a>
             <span class="nav-divider"></span>
             <a class="nav-link" href="{{ route('faults.index') }}">Неисправности</a>
+            <a class="nav-link" href="{{ route('checklist.index') }}">Чек-лист</a>
+            <span class="nav-divider"></span>
         </div>
 
         <!-- Десктопный поиск -->
@@ -47,6 +49,7 @@
         <a class="nav-link" href="{{ route('guide') }}">Руководство ПО</a>
         <a class="nav-link" href="{{ route('chapters') }}">Все главы</a>
         <a class="nav-link" href="{{ route('faults.index') }}">Неисправности</a>
+        <a class="nav-link" href="{{ route('checklist.index') }}">Чек-лист</a>
     </div>
     <div class="search-form-mobile">
         <form action="{{ route('search.global') }}" method="GET">
@@ -59,13 +62,6 @@
 <main>
     @yield('content')
 </main>
-
-<footer class="footer">
-    <div class="container">
-        <p>2025 Wattsan CO2 Laser — Полный паспорт оборудования</p>
-        <p>Модели: 6090 | 1290 | 1610</p>
-    </div>
-</footer>
 
 <script>
     // Бургер-меню для мобильных устройств

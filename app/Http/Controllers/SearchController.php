@@ -15,13 +15,15 @@ class SearchController extends Controller
         $faults = [];
 
         if ($query) {
-            $chapters = Chapter::where('title', 'LIKE', "%{$query}%")
-                ->orWhere('content', 'LIKE', "%{$query}%")
+            $lowerQuery = mb_strtolower($query);
+
+            $chapters = Chapter::whereRaw('LOWER(title) LIKE ?', ["%{$lowerQuery}%"])
+                ->orWhereRaw('LOWER(content) LIKE ?', ["%{$lowerQuery}%"])
                 ->get();
 
-            $faults = Fault::where('description', 'LIKE', "%{$query}%")
-                ->orWhere('cause', 'LIKE', "%{$query}%")
-                ->orWhere('solution', 'LIKE', "%{$query}%")
+            $faults = Fault::whereRaw('LOWER(description) LIKE ?', ["%{$lowerQuery}%"])
+                ->orWhereRaw('LOWER(cause) LIKE ?', ["%{$lowerQuery}%"])
+                ->orWhereRaw('LOWER(solution) LIKE ?', ["%{$lowerQuery}%"])
                 ->get();
         }
 

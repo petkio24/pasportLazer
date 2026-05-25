@@ -198,5 +198,38 @@
                 item.classList.remove('open');
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, нужно ли раскрыть и показать определённую главу
+            var chapterId = sessionStorage.getItem('scrollToChapter');
+            if (chapterId) {
+                sessionStorage.removeItem('scrollToChapter');
+
+                // Находим элемент главы
+                var chapterElement = document.getElementById('chapter-' + chapterId);
+                if (chapterElement) {
+                    // Раскрываем главу и всех родителей
+                    var current = chapterElement;
+                    while (current) {
+                        current.classList.add('open');
+                        var content = current.querySelector('.chapter-content');
+                        if (content) {
+                            content.style.display = 'block';
+                        }
+                        current = current.parentElement.closest('.chapter-item');
+                    }
+
+                    // Прокручиваем к главе
+                    chapterElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    // Подсвечиваем главу жёлтым на 3 секунды
+                    chapterElement.style.transition = 'background 0.3s';
+                    chapterElement.style.background = '#fffbcc';
+                    setTimeout(function() {
+                        chapterElement.style.background = '';
+                    }, 3000);
+                }
+            }
+        });
     </script>
 @endsection
